@@ -36,6 +36,9 @@ echo -e "\n--- Restarting MySQL ---\n"
 echo -e "\n--- Installing PHP-specific packages ---\n"
 apt-get -y install php5 apache2 libapache2-mod-php5 php5-curl php5-gd php5-mcrypt php5-mysql php-apc php5-xdebug > /dev/null 2>&1
 
+echo -e "\n--- Enabling PHP mcrypt module ---\n"
+php5enmod mcrypt
+
 echo -e "\n--- Configure php.ini for work with xdebug ---\n"
 sed -i '$ a \\n[xdebug]\nxdebug.remote_enable = On\nxdebug.remote_connect_back = On\nxdebug.max_nesting_level = 400\nhtml_errors = 1\nxdebug.extended_info = 1' /etc/php5/apache2/php.ini
 
