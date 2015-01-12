@@ -39,8 +39,9 @@ apt-get -y install php5 apache2 libapache2-mod-php5 php5-curl php5-gd php5-mcryp
 echo -e "\n--- Enabling PHP mcrypt module ---\n"
 php5enmod mcrypt
 
-echo -e "\n--- Configure php.ini for work with xdebug ---\n"
+echo -e "\n--- Configure php.ini... ---\n"
 sed -i '$ a \\n[xdebug]\nxdebug.remote_enable = On\nxdebug.remote_connect_back = On\nxdebug.max_nesting_level = 400\nhtml_errors = 1\nxdebug.extended_info = 1' /etc/php5/apache2/php.ini
+sed -i "s/display_errors = Off/display_errors = On/g" /etc/php5/apache2/php.ini
 
 echo -e "\n--- Enabling mod-rewrite ---\n"
 a2enmod rewrite > /dev/null 2>&1
