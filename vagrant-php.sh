@@ -4,6 +4,7 @@ DBHOST=localhost
 DBNAME=db
 DBUSER=db
 DBPASSWD=123
+XDEBUGIDEKEY=PHPSTORM
 
 echo -e "\n-- Start installing now... ---\n"
 
@@ -40,7 +41,7 @@ echo -e "\n--- Enabling PHP mcrypt module ---\n"
 php5enmod mcrypt
 
 echo -e "\n--- Configure php.ini... ---\n"
-sed -i '$ a \\n[xdebug]\nxdebug.remote_enable = On\nxdebug.remote_connect_back = On\nxdebug.max_nesting_level = 400\nhtml_errors = 1\nxdebug.extended_info = 1' /etc/php5/apache2/php.ini
+sed -i "$ a \ \n[xdebug]\nxdebug.remote_enable = On\nxdebug.remote_connect_back = On\nxdebug.max_nesting_level = 400\nhtml_errors = 1\nxdebug.extended_info = 1\nxdebug.profiler_output_dir=\"/vagrant/logs/xdebug\"\nxdebug.profiler_output_name = \"cachegrind.out.%H%R\"\nxdebug.trace_output_dir = \"/vagrant/logs/xdebug/\"\nxdebug.remote_log = \"/vagrant/logs/xdebug-access.log\"\nxdebug.idekey = \"$XDEBUGIDEKEY\"" /etc/php5/apache2/php.ini
 sed -i "s/display_errors = Off/display_errors = On/g" /etc/php5/apache2/php.ini
 
 echo -e "\n--- Enabling mod-rewrite ---\n"
